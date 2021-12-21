@@ -8,6 +8,9 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { CancelComponent } from './components/cancel/cancel.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+
 
 const appRoutes: Routes = [
   { path: '', component: ExploreComponent },
@@ -29,6 +32,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
       ),
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
