@@ -11,6 +11,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 
 const appRoutes: Routes = [
@@ -35,7 +39,9 @@ const appRoutes: Routes = [
       ),
     BrowserAnimationsModule,
     MatCardModule,
-    NgbModule
+    NgbModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
