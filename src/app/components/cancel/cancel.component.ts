@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancelComponent implements OnInit {
 
-  constructor() { }
+  public codeReservation: String = "Soy prueba";
+
+  constructor() {
+
+  }
+  
 
   ngOnInit(): void {
+  }
+
+  sendCancel(){
+    console.log("Sending cancel " + this.codeReservation);
   }
 
 }
