@@ -1,1 +1,39 @@
-<p>Reservas!</p>
+<div [ngStyle]="{'background-image': 'url(https://d25dk4h1q4vl9b.cloudfront.net/bundles/common/header-home-v2--br.jpg)'}" class="restaurantImage"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6" >
+            <h1> Restaurante de Juan</h1>
+            <p>Av Americas</p>
+            <p>Mejor restaurante</p>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <form class="booking-form" [formGroup]="bookingForm" (ngSubmit)="sendBooking()">
+                <h1>Realiza tu reserva</h1>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Personas</mat-label>
+                        <input type="number" formControlName="customers" matInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Turno</mat-label>
+                        <select matNativeControl required formControlName="turn">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                          </select>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Dia</mat-label>
+                        <input matInput [matDatepicker]="date" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div class="text-right">
+                    <button type="submit" mat-button color="primary" [disabled]="!bookingForm.valid">Enviar Reserva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

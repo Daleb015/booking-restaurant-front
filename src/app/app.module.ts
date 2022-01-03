@@ -13,6 +13,14 @@ import {MatCardModule} from '@angular/material/card';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 
 
@@ -32,6 +40,7 @@ const appRoutes: Routes = [
     HeaderComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(
@@ -41,7 +50,12 @@ const appRoutes: Routes = [
     MatCardModule,
     NgbModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
