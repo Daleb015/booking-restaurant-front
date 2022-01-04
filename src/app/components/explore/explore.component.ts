@@ -17,7 +17,7 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getAllRestaurantsMock().subscribe((result: GetRestaurantsResponseRest) => {
+    this.service.getAllRestaurants().subscribe((result: GetRestaurantsResponseRest) => {
       this.restaurants = result.data;
     });
   }

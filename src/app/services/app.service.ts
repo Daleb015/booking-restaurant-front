@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { GetRestaurantsResponseRest } from '../shared/models/get-restaurants-response-rest';
 import { RestaurantResponseRest } from '../shared/models/restaurant-response-rest';
+
+const API = "http://localhost:8080/api/booking-restaurant/v1";
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +26,8 @@ export class AppService {
   }
 
   getAllRestaurants() {
-    throw new Error('Method not implemented.');
+    return this.http.get<GetRestaurantsResponseRest>(API+'/restaurants');
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 }
