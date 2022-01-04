@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { CreateReservationRequestRest } from '../shared/models/create-reservation-request-rest';
 import { GetRestaurantsResponseRest } from '../shared/models/get-restaurants-response-rest';
 import { RestaurantResponseRest } from '../shared/models/restaurant-response-rest';
 
@@ -10,6 +11,10 @@ const API = "http://localhost:8080/api/booking-restaurant/v1";
   providedIn: 'root'
 })
 export class AppService {
+
+  createReservation(booking: CreateReservationRequestRest) {
+    return this.http.post(API+'/reservation', booking);
+  }
 
   getAllRestaurantsMock() {
     
