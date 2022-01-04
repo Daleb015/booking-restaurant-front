@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { CreateReservationRequestRest } from '../shared/models/create-reservation-request-rest';
@@ -11,6 +11,10 @@ const API = "http://localhost:8080/api/booking-restaurant/v1";
   providedIn: 'root'
 })
 export class AppService {
+
+  cancelReservation(codeReservation: String) {
+    return this.http.delete(API+'/reservation', {params:{locator: ''+codeReservation}});
+  }
 
   createReservation(booking: CreateReservationRequestRest) {
     return this.http.post(API+'/reservation', booking);
