@@ -20,7 +20,7 @@ export class BookingComponent implements OnInit {
 
   private idRestaurant: number = 0;
 
-  public restaurant = new RestaurantResponseRest();
+  public restaurant: RestaurantResponseRest = new RestaurantResponseRest(0, '', '', '', [], '');
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,10 +58,8 @@ export class BookingComponent implements OnInit {
   getRestaurant() {
     this.service.getRestaurant(this.idRestaurant)
     .subscribe((result: GetRestaurantResponseRest) => {
-      console.log(result);
-      this.restaurant = result.Data as RestaurantResponseRest;
-      console.log('la imagen es : '+this.restaurant );
-      
+      console.log(result.data);
+      this.restaurant = result.data;
     });
   }
 
