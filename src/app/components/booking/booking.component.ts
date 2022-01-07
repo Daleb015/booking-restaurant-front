@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
-import { CreateReservationResponseRest } from 'src/app/shared/models/create-reservation-response-rest';
+import { InfoDialogComponent } from 'src/app/shared/dialogs/info-dialog/info-dialog.component';
 import { GetRestaurantResponseRest } from 'src/app/shared/models/get-restaurant-response-rest';
 import { RestaurantResponseRest } from 'src/app/shared/models/restaurant-response-rest';
 import { CreateReservationRequestRest } from '../../shared/models/create-reservation-request-rest';
@@ -23,6 +24,7 @@ export class BookingComponent implements OnInit {
   public restaurant: RestaurantResponseRest = new RestaurantResponseRest(0, '', '', '', [], '');
 
   constructor(
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private service: AppService,
     private route: ActivatedRoute
@@ -41,7 +43,7 @@ export class BookingComponent implements OnInit {
     this.bookingForm.reset();
   }
 
-  setBooking(){
+  setBooking() {
     this.booking.restaurantId = this.idRestaurant;
     this.booking.date = this.bookingForm.value.date;
     this.booking.turnId = this.bookingForm.value.turn;
@@ -52,14 +54,27 @@ export class BookingComponent implements OnInit {
     this.setBooking();
     this.service.createReservation(this.booking).subscribe((result: any) => {
       console.log(result);
+      const title = 'Tu codigo de reserva es: ' + result.data;
+      const info = 'Por favor guarda tu código de reserva para presentarlo al restaurante';
+      this.openDialog(info, title);
     });
   }
 
   getRestaurant() {
     this.service.getRestaurant(this.idRestaurant)
-    .subscribe((result: GetRestaurantResponseRest) => {
-      console.log(result.data);
-      this.restaurant = result.data;
+      .subscribe((result: GetRestaurantResponseRest) => {
+        console.log(result.data);
+        this.restaurant = result.data;
+      });
+  }
+
+  openDialog(info: String, title:String): void {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '250px',
+      data: {info: info, title: title }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 

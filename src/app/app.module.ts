@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import { InfoDialogComponent } from './shared/dialogs/info-dialog/info-dialog.component';
 
 
 
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     BookingComponent,
     ExploreComponent,
     CancelComponent,
-    HeaderComponent
+    HeaderComponent,
+    InfoDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -58,7 +61,8 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
