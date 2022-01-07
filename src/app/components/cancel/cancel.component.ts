@@ -8,10 +8,13 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class CancelComponent implements OnInit {
 
-  public codeReservation: String = "Soy prueba";
+  public codeReservation: String;
+
+  public state: String;
 
   constructor(private service: AppService) {
-
+    this.codeReservation = "";
+    this.state = "Tú reserva aún no ha sido cancelada";
   }
   
 
