@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { InfoDialogComponent } from './shared/dialogs/info-dialog/info-dialog.component';
+import { BookingFormComponent } from './components/booking/booking-form/booking-form.component';
 
 
 
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     ExploreComponent,
     CancelComponent,
     HeaderComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    BookingFormComponent
   ],
   imports: [
     ReactiveFormsModule,
