@@ -1,8 +1,14 @@
 .restaurantImage{
-    height: 25vw;
+    height: 70vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    min-height: 630px;
 }
-
+.restaurantBackground{
+    height: 95%;
+    background-size: cover;
+    background-position: center;
+    min-height: 630px;
+    width: 100%;
+    background-attachment: fixed;
+}
