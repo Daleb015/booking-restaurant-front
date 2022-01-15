@@ -1,17 +1,22 @@
-<div [ngStyle]="{'background-image': 'url('+restaurant.image+')'}" class="restaurantBackground"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6" >
-            <mat-card>
-                <div [ngStyle]="{'background-image': 'url('+restaurant.image+')'}" class="restaurantImage"></div>
-                <h1> {{restaurant.name}}</h1>
-                <p>{{restaurant.address}}</p>
-                <p>{{restaurant.description}}</p>
-            </mat-card>
+<div [ngStyle]="{'background-image': 'url('+restaurant.image+')'}" class="restaurantBackground">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <mat-card>
+                    <div [ngStyle]="{'background-image': 'url('+restaurant.image+')'}" class="restaurantImage"></div>
+                    <h1> {{restaurant.name}}</h1>
+                    <p>{{restaurant.address}}</p>
+                    <p>{{restaurant.description}}</p>
+                </mat-card>
 
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <app-booking-form [restaurant]="restaurant"></app-booking-form>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <mat-card>
+                    <app-booking-form [restaurant]="restaurant"></app-booking-form>
+                </mat-card>
+            </div>
+
         </div>
     </div>
 </div>
