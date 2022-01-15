@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { InfoDialogComponent } from 'src/app/shared/dialogs/info-dialog/info-dialog.component';
 import { CreateReservationRequestRest } from 'src/app/shared/models/create-reservation-request-rest';
 import { RestaurantResponseRest } from 'src/app/shared/models/restaurant-response-rest';
@@ -24,7 +25,8 @@ export class BookingFormComponent implements OnInit {
     private service: AppService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private paymentService: PaymentService
   ) {
     this.bookingForm = this.formBuilder.group({
       date: [new Date(), Validators.required],
@@ -51,7 +53,8 @@ export class BookingFormComponent implements OnInit {
   payBooking() {
     this.setBooking();
     this.service.createReservation(this.booking).subscribe((result: any) => {
-     this.router.navigate(['/payment', result.data]);
+      this.paymentService.setPaymentModel({...this.booking, locator:result.data});
+     this.router.navigate(['/payment']);
     });
   }
 
