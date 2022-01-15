@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-stepper linear #stepper>
+        <mat-step label="Pagar" [editable]="false">
+            <div> PAGO </div>
+            <button mat-button matStepperNext color="primary">Siguiente</button>
+        </mat-step>
+        <mat-step label="Resumén" [editable]="false">
+            <div>
+                <h1>Dato de Pago </h1>
+                <h3>Nombre: </h3>
+                <h3>Coste: </h3>
+                <h3>Código Reserva: </h3>
+            </div>
+            <button mat-button (click)="cancel()" matStepperPrevious color="secundary">Cancelar</button>
+            <button mat-button (click)="confirm()" matStepperNext color="primary">Confirmar</button>
+        </mat-step>
+        <mat-step label="Resultado">
+            <h1> Mensaje informativo </h1>
+        </mat-step>
+    </mat-stepper>
+</mat-card>

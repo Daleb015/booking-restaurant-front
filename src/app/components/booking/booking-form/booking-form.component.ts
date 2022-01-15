@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 import { InfoDialogComponent } from 'src/app/shared/dialogs/info-dialog/info-dialog.component';
 import { CreateReservationRequestRest } from 'src/app/shared/models/create-reservation-request-rest';
@@ -15,14 +16,15 @@ export class BookingFormComponent implements OnInit {
 
   public booking = new CreateReservationRequestRest();
 
-  @Input() restaurant: RestaurantResponseRest = new RestaurantResponseRest(0, '', '', '', [], '',0);
+  @Input() restaurant: RestaurantResponseRest = new RestaurantResponseRest(0, '', '', '', [], '', 0);
 
   public bookingForm: FormGroup;
 
   constructor(
     private service: AppService,
     public dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.bookingForm = this.formBuilder.group({
       date: [new Date(), Validators.required],
@@ -40,10 +42,16 @@ export class BookingFormComponent implements OnInit {
   sendBooking() {
     this.setBooking();
     this.service.createReservation(this.booking).subscribe((result: any) => {
-      console.log(result);
       const title = 'Tu codigo de reserva es: ' + result.data;
       const info = 'Por favor guarda tu código de reserva para presentarlo al restaurante';
       this.openDialog(info, title);
+    });
+  }
+
+  payBooking() {
+    this.setBooking();
+    this.service.createReservation(this.booking).subscribe((result: any) => {
+     this.router.navigate(['/payment', result.data]);
     });
   }
 

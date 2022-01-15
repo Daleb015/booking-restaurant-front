@@ -1,4 +1,4 @@
-<form class="booking-form" [formGroup]="bookingForm" (ngSubmit)="sendBooking()">
+<form class="booking-form" [formGroup]="bookingForm">
     <h1>Realiza tu reserva</h1>
     <div>
         <mat-form-field appearance="fill">
@@ -29,6 +29,7 @@
         </mat-form-field>
     </div>
     <div class="text-right">
-        <button type="submit" mat-button color="primary" [disabled]="!bookingForm.valid">Enviar Reserva</button>
+        <button (click)="sendBooking()" type="submit" mat-button color="primary" [disabled]="!bookingForm.valid"> Reservar </button>
+        <button mat-button (click)="payBooking()" color="secundary" [disabled]="!bookingForm.valid"> Reservar y Pagar </button>
     </div>
 </form>
