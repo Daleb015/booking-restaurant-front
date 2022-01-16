@@ -25,7 +25,8 @@ import { InfoDialogComponent } from './shared/dialogs/info-dialog/info-dialog.co
 import { BookingFormComponent } from './components/booking/booking-form/booking-form.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { PaymentComponent } from './components/payment/payment.component';
-
+import { environment } from 'src/environments/environment';
+import {NgxStripeModule} from 'ngx-stripe';
 
 
 
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     MatInputModule,
     HttpClientModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxStripeModule.forRoot(environment.STRIPE_PUBLIC_KEY)
   ],
   providers: [],
   bootstrap: [AppComponent]
