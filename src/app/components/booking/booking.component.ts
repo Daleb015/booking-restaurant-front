@@ -34,7 +34,6 @@ export class BookingComponent implements OnInit {
   getRestaurant() {
     this.service.getRestaurant(this.idRestaurant)
       .subscribe((result: GetRestaurantResponseRest) => {
-        console.log(result.data);
         this.bookingForm.restaurant = result.data;
         this.restaurant = result.data;
       });

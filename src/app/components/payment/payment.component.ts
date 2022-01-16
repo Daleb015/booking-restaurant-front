@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaymentIntent } from 'src/app/shared/models/payment-intent';
 import { PaymentService } from 'src/app/services/payment.service';
 import { PaymentModel } from 'src/app/shared/models/payment-model';
+import { PaymentConfirm } from 'src/app/shared/models/payment-confirm';
 
 @Component({
   selector: 'app-payment',
@@ -36,6 +37,8 @@ export class PaymentComponent implements OnInit {
     locale: 'es'
   };
 
+  successMessage: string;
+
   paymentModel!: PaymentModel;
 
   paymentIntentConfirm!: string;
@@ -43,21 +46,33 @@ export class PaymentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private stripeService: StripeService,
-    private paymentService: PaymentService) { }
+    private paymentService: PaymentService) {
+    this.successMessage = 'Espera...';
+  }
 
   ngOnInit(): void {
+    this.paymentModel = this.paymentService.getPaymentModel();
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
     });
-    this.paymentModel = this.paymentService.getPaymentModel();
   }
 
   cancel() {
-    console.log('cancel')
+    this.paymentService.cancel(this.paymentIntentConfirm).subscribe((result: any) => {
+      this.successMessage = 'Pago Cancelado Con Exito';
+    });
   }
 
   confirm() {
-    console.log('confirm')
+    const paymentConfirm: PaymentConfirm = {
+      email: this.paymentModel.email,
+      locator: this.paymentModel.locator,
+      name: this.paymentModel.name,
+      paymentId: this.paymentIntentConfirm
+    }
+    this.paymentService.confirm(paymentConfirm).subscribe((result: any) => {
+      this.successMessage = 'Pago Realizado Con Exito';
+    });
   }
 
   createToken(): void {
@@ -69,7 +84,7 @@ export class PaymentComponent implements OnInit {
 
           const paymentIntent: PaymentIntent = {
             description: this.paymentModel.name + ' : ' + this.paymentModel.locator,
-            price: 0
+            price: this.paymentModel.price,
           }
 
           this.executeIntent(paymentIntent);
@@ -81,7 +96,7 @@ export class PaymentComponent implements OnInit {
       });
   }
 
-  executeIntent(payment: PaymentIntent){
+  executeIntent(payment: PaymentIntent) {
     this.paymentService.buy(payment).subscribe((result: any) => {
       this.paymentIntentConfirm = result.id;
     });
